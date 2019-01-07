@@ -1,1 +1,1 @@
-# Dit is een sanbox omgeving
+# Dit is een sandbox omgeving
