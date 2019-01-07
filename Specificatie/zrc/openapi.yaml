@@ -2470,7 +2470,7 @@ components:
             \ van de ROL."
           maxLength: 80
         rolOmschrijvingGeneriek:
-          $ref: "#/components/schemas/RolomschrijvingGeneriek"
+          $ref: "#/components/schemas/RolomschrijvingGeneriek_enum"
         rolToelichting:
           type: "string"
           title: "rolToelichting"
@@ -2478,7 +2478,7 @@ components:
             \ van de rol."
           maxLength: 1000
         betrokkenetype:
-          $ref: "#/components/schemas/Betrokkenetype"
+          $ref: "#/components/schemas/Betrokkenetype_enum"
         zaken:
           type: "string"
           format: "uri"
@@ -2807,7 +2807,7 @@ components:
             \ alle alfanumerieke tekens"
           maxLength: 80
         objecttype:
-          $ref: "#/components/schemas/Objecttype"
+          $ref: "#/components/schemas/Objecttype_enum"
         uuid:
           type: "string"
           title: "uuid"
@@ -2854,7 +2854,7 @@ components:
           title: "Kenmerk"
           description: "Identificeert uniek de zaak in een andere administratie."
           maxLength: 40
-    Objecttype:
+    Objecttype_enum:
       type: "string"
       description: "Benamingen van het type object. De specialisaties van het objecttype\
         \ Object zoals die in het informatiemodel zijn uitgewerkt zijn hier weergegeven\
@@ -2866,7 +2866,7 @@ components:
       - "Verblijfsobject"
       - "Inzageverzoek"
       - "MedlingOpenbareRuimte"
-    Betrokkenetype:
+    Betrokkenetype_enum:
       type: "string"
       description: "Benaminegna van het type berokkene. De specialisaties van betrokkene\
         \ zijn opgenomen in een enumeratie. Benaminegna van het type berokkene. De\
@@ -2880,7 +2880,7 @@ components:
       - "Vestiging"
       - "Organisatorische eenheid"
       - "Medewerker"
-    RolomschrijvingGeneriek:
+    RolomschrijvingGeneriek_enum:
       type: "string"
       description: "Algemeen gehanteerde benamingen van de aard van rollen.:\n* Adviseur\
         \ - Adviseur\n* Behandelaar - Behandelaar\n* Belanghebbende - Belanghebbende\n\
