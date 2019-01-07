@@ -1,1 +1,1315 @@
-q
+openapi: 3.0.0
+servers:
+  - description: "SwaggerHub API Auto Mocking"
+    url: https://virtserver.swaggerhub.com/VNGRealisatie/api/api_voor_documentregistratiecomponent/v1
+  - description: "Referentie-implementatie"
+    url: https://www.voorbeeldgemeente.nl/api/api_voor_documentregistratiecomponent/v1
+info:
+  title: API voor Documentregistratiecomponent
+  description: "De API-specificatie voor het opslaan en naar andere applicaties ontsluiten van informatieobjecten (in de ‘volksmond’: documenten). Deze informatieobjecten zijn gestructureerd en voorzien van de benodigde metadata opgeslagen. Opslag vindt plaats conform het informatie-objecten-gedeelte van het RGBZ."
+  version: "1.0"
+  contact:
+    url: https://github.com/VNG-Realisatie/gemma-zaken/
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+security:
+-	JWT-Claims: [] 
+paths:
+  /objectinformatieobjecten:
+    post:
+      operationId: postobjectinformatieobjecten
+      description: "Het vastleggen van een OBJECTINFORMATIEOBJECT."
+      parameters: 
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/contentCrs'
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/acceptCrs'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectInformatieobject'
+      responses:
+        '201':
+          description: "OK"
+          headers:
+            Location:
+              description: "URI van de nieuwe resource"
+              schema:
+                type: string
+                format: uri
+                example: '/objectinformatieobjecten/550e8400-e29b-41d4-a716-446655440000'
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '412':
+          description: Precondition Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Objectinformatieobjecten
+    get:
+      operationId: objectinformatieobjecten
+      description: "Het ophalen van alle OBJECTINFORMATIEOBJECTEN."
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Objectinformatieobjecten
+  /enkelvoudiginformatieobjecten:
+    post:
+      operationId: postenkelvoudiginformatieobjecten
+      description: "Het vastleggen van een BESLUITINFORMATIEOBJECT."
+      parameters: 
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/contentCrs'
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/acceptCrs'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+      responses:
+        '201':
+          description: "OK"
+          headers:
+            Location:
+              description: "URI van de nieuwe resource"
+              schema:
+                type: string
+                format: uri
+                example: '/enkelvoudiginformatieobjecten/14identieficatie-a12 806381309B01.'
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '412':
+          description: Precondition Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Enkelvoudiginformatieobjecten
+    get:
+      operationId: enkelvoudiginformatieobjecten
+      description: "Het ophalen van alle BESLUITINFORMATIEOBJECTEN die bij een BESLUIT horen."
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Enkelvoudiginformatieobjecten
+  /objectinformatieobjecten/{uuid}:
+    patch:
+      operationId: postobjectinformatieobjectenUuid
+      description: "Het gedeeltelijk wijzigen van een OBJECTINFORMATIEOBJECT."
+      parameters: 
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/contentCrs'
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/acceptCrs'
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectInformatieobject'
+      responses:
+        '201':
+          description: "OK"
+          headers:
+            Location:
+              description: "URI van de nieuwe resource"
+              schema:
+                type: string
+                format: uri
+                example: '/objectinformatieobjecten/{uuid}/550e8400-e29b-41d4-a716-446655440000'
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '412':
+          description: Precondition Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Objectinformatieobjecten
+    get:
+      operationId: objectinformatieobjectenUuid
+      description: "Het ophalen van een OJECTINFORMATIEOBJECT."
+      parameters: 
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectInformatieobject'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Objectinformatieobjecten
+    put:
+      operationId: postobjectinformatieobjectenUuid
+      description: "Het wijzigen van een volledig OBJECTINFORMATIEOBJECT."
+      parameters: 
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/contentCrs'
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/acceptCrs'
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectInformatieobject'
+      responses:
+        '201':
+          description: "OK"
+          headers:
+            Location:
+              description: "URI van de nieuwe resource"
+              schema:
+                type: string
+                format: uri
+                example: '/objectinformatieobjecten/{uuid}/550e8400-e29b-41d4-a716-446655440000'
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '412':
+          description: Precondition Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Objectinformatieobjecten
+  /enkelvoudiginformatieobjecten/{uuid}:
+    put:
+      operationId: postenkelvoudiginformatieobjectenUuid
+      description: "Het wijzigen van een volledig BESLUITINFORMATIEOBJECT."
+      parameters: 
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/contentCrs'
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/acceptCrs'
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+      responses:
+        '201':
+          description: "OK"
+          headers:
+            Location:
+              description: "URI van de nieuwe resource"
+              schema:
+                type: string
+                format: uri
+                example: '/enkelvoudiginformatieobjecten/{uuid}/14identieficatie-a12 806381309B01.'
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '412':
+          description: Precondition Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Enkelvoudiginformatieobjecten
+    get:
+      operationId: enkelvoudiginformatieobjectenUuid
+      description: "Het ophalen van een ENKELVOUDIGINFORMATIEOBJECT."
+      parameters: 
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Enkelvoudiginformatieobjecten
+    patch:
+      operationId: postenkelvoudiginformatieobjectenUuid
+      description: "Het gedeeltelijk wijzigen van een ENKELVOUDIGINFORMATIEOBJECT."
+      parameters: 
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/contentCrs'
+        - $ref: 'https://cdn.jsdelivr.net/gh/geonovum/kp-api-guidelines@1.0.0/components/parameters.yaml#/acceptCrs'
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+      responses:
+        '201':
+          description: "OK"
+          headers:
+            Location:
+              description: "URI van de nieuwe resource"
+              schema:
+                type: string
+                format: uri
+                example: '/enkelvoudiginformatieobjecten/{uuid}/14identieficatie-a12 806381309B01.'
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnkelvoudigInformatieobject'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '412':
+          description: Precondition Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Enkelvoudiginformatieobjecten
+components:
+  schemas:
+    ObjectInformatieobject:
+      type: "object"
+      description: "De relatie tussen een ZAAK en een INFORMATIEOBJECT dat relevant\
+        \ is voor de behandeling van die ZAAK en/of gecreëerd is in het kader van\
+        \ de behandeling van die ZAAK"
+      required:
+      - "registratiedatum"
+      - "uuid"
+      properties:
+        url:
+          type: "string"
+          title: "url"
+          description: "De url van de relatie tussen het besluit en het Informatieobject\
+            \ zoals die in het documentregistratiecomponent wordt onderhouden. alle\
+            \ alfanumerieke tekens"
+        titel:
+          type: "string"
+          title: "Titel"
+          description: "De naam waaronder het INFORMATIEOBJECT binnen de ZAAK bekend\
+            \ is. De naam waaronder een INFORMATIEOBJECT bekend is, wordt vastgelegd\
+            \ bij het INFORMATIEOBJECT. Als een INFORMATIEOBJECT voor meerdere zaken\
+            \ relevant is, kan het voor komen dat het niet in elke gerelateerde ZAAK\
+            \ dezelfde naam heeft. Dit attribuutsoort geeft de mogelijkheid om de\
+            \ naam van het INFORMATIEOBJECT te variëren naar gelang de gerelateerde\
+            \ ZAAK. De afwijkende naam zal veelal afgeleid zijn van de naam (titel)\
+            \ van het desbetreffende informatieobject (bij INFORMATIEOBJECT). alle\
+            \ alfanumerieke tekens"
+          maxLength: 200
+          example: "Comissieverslag Red de Boom"
+        beschrijving:
+          type: "string"
+          title: "Beschrijving"
+          description: "Een op de zaak gerichte beschrijving van de inhoud van het\
+            \ INFORMATIEOBJECT. De beschrijving van de inhoud van een INFORMATIEOBJECT\
+            \ wordt vastgelegd bij het INFORMATIEOBJECT. Als een INFORMATIEOBJECT\
+            \ voor meerdere zaken relevant is, kan het voor komen dat de beschrijving\
+            \ specifiek gericht wordt op de gerelateerde ZAAK. Dit attribuutsoort\
+            \ geeft de mogelijkheid om de beschrijving van de inhoud van het INFORMATIEOBJECT\
+            \ te variëren naar gelang de gerelateerde ZAAK. De beschrijving zal veelal\
+            \ gelijk zijn aan of afgeleid zijn van de generieke beschrijving van de\
+            \ inhoud van het INFORMATIEOBJECT (bij INFORMATIEOBJECT). alle alfanumerieke\
+            \ tekens"
+          maxLength: 1000
+          example: "Verslag van de commissievergadering om de boom voor het stadshuis\
+            \ de redden van de iepenziekte."
+        registratiedatum:
+          type: "string"
+          title: "Registratiedatum"
+          description: "De datum waarop de zaakbehandelende organisatie het INFORMATIEOBJECT\
+            \ heeft geregistreerd bij de ZAAK. Alle geldige datums gelegen op of voor\
+            \ de huidige datum en tijd"
+          format: "date"
+        uuid:
+          type: "string"
+          title: "uuid"
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt\
+            \ weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld\
+            \ in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens:\
+            \ 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd,\
+            \ waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122)\
+            \ wordt de structuur van de UUID beschreven."
+          maxLength: 36
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        vernietigingsdatum:
+          type: "string"
+          title: "Vernietigingsdatum"
+          description: "De datum waarop het informatieobject uit het zaakdossier verwijderd\
+            \ moet worden. De vernietiging of overbrenging van de zaak met al haar\
+            \ gegevens en informatieobjecten vindt plaats op de datumwaarde van de\
+            \ attribuutsoort Archiefactiedatum van de gerelateerde zaak. Om redenen\
+            \ van privacy of anderszins kan het van belang zijn om bepaald informatieobjecten\
+            \ eerder uit het zaakdossier te verwijderen (en te vernietigen indien\
+            \ het informatieobject daarna van geen enkele zaakdossier meer deel uit\
+            \ maakt). Voor informatieobjecten waarvoor dit geldt, wordt met deze attribuutsoort\
+            \ de vernietigingsdatum vastgelegd. Dit wordt ontleend aan de relatiesoort\
+            \ 'RESULTAATTYPE bepaalt afwijkende vernietigingstermijn van ZAAK-INFORMATIEOBJECT-TYPE'\
+            \ in een ImZTC-conforme zaaktypecatalogus."
+          format: "date"
+        besluiten:
+          type: "string"
+          format: "uri"
+          readOnly: true
+        enkelvoudiginformatieobjecten:
+          title: "kanVastgelegdZijnAls"
+          type: "array"
+          description: "Aanduiding van het (de) INFORMATIEOBJECT(en) waarin het BESLUIT\
+            \ beschreven is. Besluiten worden veelal schriftelijk vastgelegd maar\
+            \ kunnen ook mondeling genomen zijn. Deze relatie verwijst naar het informatieobject\
+            \ waarin het besluit is vastgelegd, indien van toepassing. Mogelijkerwijs\
+            \ is het besluit in meerdere afzonderlijke informatieobject en vastgelegd\
+            \ of zijn in één informatieobject meerdere besluiten vastgelegd."
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+    EnkelvoudigInformatieobject:
+      type: "object"
+      description: "Een INFORMATIEOBJECT waarvan aard, omvang en/of vorm aanleiding\
+        \ geven het als één geheel te behandelen en te beheren. Een ENKELVOUDIG INFORMATIEOBJECT\
+        \ is een specialisatie van INFORMATIEOBJECT. Zie de toelichting bij dat objecttype.\
+        \ Bij de definitie is gebruik gemaakt van de beschrijving van 'component'\
+        \ in de MoReq2 (2008). In de dagelijkse praktijk staat 'ENKELVOUDIG INFORMATIEOBJECT'\
+        \ veelal synoniem met 'document'. Het ENKELVOUDIG INFORMATIEOBJECT kan deel\
+        \ uit maken van een SAMENGESTELD INFORMATIEOBJECT, bijvoorbeeld omdat zich\
+        \ in dat SAMENGESTELD INFORMATIEOBJECT andere documenten bevinden met een\
+        \ ander bestandsformaat, vanwege de omvang van dat SAMENGESTELD INFORMATIEOBJECT\
+        \ of omdat behandeling daartoe aanleiding geeft. Een ENKELVOUDIG INFORMATIEOBJECT\
+        \ dat deel uit maakt van een SAMENGESTELD INFORMATIEOBJECT kan aan andere\
+        \ ZAAKen gerelateerd zijn dan de ZAAK waaraan dat SAMENGESTELD INFORMATIEOBJECT\
+        \ gerelateerd is, veelal omdat dat ENKELVOUDIG INFORMATIEOBJECT relevant is\
+        \ voor meerdere ZAAKen. INFORMATIEOBJECTen, vooral die van de zaakbehandelende\
+        \ organisatie, worden soms gewijzigd of in opeenvolgende conceptversies vervaardigd.\
+        \ Het is uit oogpunt van verantwoording van belang de diverse informatieobjectversies\
+        \ te kennen. Hiertoe is bij de meeste van de attribuuttypen van ENKELVOUDIG\
+        \ INFORMATIEOBJECT zowel materiële als formele historie als ‘Ja’ gedeclareerd.\
+        \ Dit impliceert dat voor deze attributen de waarden in de diverse versies\
+        \ van een ENKELVOUDIG INFORMATIEOBJECT opgevraagd kunnen worden."
+      required:
+      - "identificatie"
+      - "bronorganisatie"
+      - "taal"
+      - "creatiedatum"
+      - "titel"
+      - "auteur"
+      - "informatieobjecttypen"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        formaat:
+          type: "string"
+          title: "Formaat"
+          description: "De code voor de wijze waarop de inhoud van het ENKELVOUDIG\
+            \ INFORMATIEOBJECT is vastgelegd in een computerbestand. Het gaat hier\
+            \ om de bestandsoort van het enkelvoudig informatieobject. Het betreft\
+            \ het Dublin Core metadata-element ‘Format’ met als toelichting: Typically,\
+            \ Format will include the media-type or dimensions of the resource. Format\
+            \ may be used to identify the software, hardware, or other equipment needed\
+            \ to display or operate the resource. Examples of dimensions include size\
+            \ and duration. Recommended best practice is to select a value from a\
+            \ controlled vocabulary (for example, the list of Internet Media Types\
+            \ (MIME) defining computer media formats). Aangezien, bij bijvoorbeeld\
+            \ omzetting naar een duurzaam bewaarbaar informatieobject, het formaat\
+            \ kan wijzigen kent deze attribuutsoort historie. MIME-types en –subtypes\
+            \ conform IANA"
+        identificatie:
+          type: "string"
+          title: "Informatieobjectidentificatie"
+          description: "Een binnen een gegeven context ondubbelzinnige referentie\
+            \ naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door\
+            \ een reeks letters, cijfers en/of leestekens, dat het informatieobject\
+            \ uniek identificeert binnen de organisatie die het informatieobject heeft\
+            \ gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen\
+            \ heeft vastgelegd (cq. de ‘gegeven context’). Door combinatie met het\
+            \ RSIN van die organisatie, als waarde van de attribuutsoort ‘Bronorganisatie’\
+            , wordt een voor geheel Nederland unieke aanduiding van informatieobjecten\
+            \ verkregen. Het betreft het Dublin Core metadata-element ‘Identifier’\
+            \ met als toelichting: Recommended best practice is to identify the resource\
+            \ by means of a string or number conforming to a formal identification\
+            \ system. Formal identification systems include but are not limited to\
+            \ the Uniform Resource Identifier (URI) (including the Uniform Resource\
+            \ Locator (URL)), the Digital Object Identifier (DOI), and the International\
+            \ Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
+          maxLength: 40
+          example: "14identieficatie-a12"
+        bronorganisatie:
+          type: "integer"
+          title: "Bronorganisatie"
+          description: "Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie\
+            \ die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste\
+            \ in een samenwerkingsketen heeft vastgelegd. Het betreft het RSIN (Rechtspersonen\
+            \ en Samenwerkingsverbanden InformatieNummer) zoals dat door de KvK in\
+            \ het NHR aan elk rechtspersoon en samenwerkingsverband is toegekend.\
+            \ Dit identificeert uniek de organisatie, zijnde een rechtspersoon of\
+            \ samenwerkingsverband, dat het informatieobject heeft gecreëerd of heeft\
+            \ ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd.\
+            \ Met het laatste doelen we er op dat bij uitwisseling van een informatieobject\
+            \ tussen samenwerkende organisaties de unieke aanduiding van het informatieobject\
+            \ niet wijzigt mits de ontvangende organisatie geen wijzigingen in het\
+            \ informatieobject aanbrengt. In het laatste geval ontstaat een nieuw\
+            \ informatieobject. Het RSIN staat in het Handelsregister (NHR) en op\
+            \ het daaraan te ontlenen uittreksel. Deze attribuutsoort vormt tezamen\
+            \ met de Informatieobjectidentificatie de unieke aanduiding van een informatieobject\
+            \ voor geheel Nederland. De waarde van dit attribuutsoort wijzigt niet,\
+            \ ook niet indien (de behandeling van) het informatieobject over zou gaan\
+            \ naar een andere organisatie. Er is immers maar één organisatie die het\
+            \ informatieobject gecreëerd of als eerste vastgelegd heeft. De in het\
+            \ NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden."
+          example: "806381309B01."
+        taal:
+          type: "string"
+          title: "Taal"
+          description: "Een taal van de intellectuele inhoud van het ENKELVOUDIG INFORMATIEOBJECT\
+            \ Conform [ISO639-2](http://www.loc.gov/standards/iso639-2/php/code_list.php)\
+            \ Het betreft het Dublin Core metadata-element ‘Language’ met als toelichting:\
+            \ Recommended best practice is to use RFC 3066 (RFC3066), which, in conjunction\
+            \ with ISO 639 (ISO639), defines two- and three-letter primary language\
+            \ tags with optional subtags. Examples include “en” or “eng” for English,\
+            \ “akk` for Akkadian, and “en-GB” for English used in the United Kingdom.\
+            \ De Nederlandse taal wordt gecodeerd als “dut”. bij voorkeur ISO 639-2/B"
+          maxLength: 20
+          example: "dut"
+        inhoud:
+          type: "string"
+          title: "Inhoud"
+          description: "Datgene wat in een ENKELVOUDIG INFORMATIEOBJECT wordt meegedeeld.\
+            \ Het gaat hier om de inhoud of content van het ENKELVOUDIG INFORMATIEOBJECT\
+            \ (in het spraakgebruik ‘de tekst van het document’) in het formaat zoals\
+            \ vastgelegd in Formaat. Veelal gaat het om de tekst van een ENKELVOUDIG\
+            \ INFORMATIEOBJECT (bijvoorbeeld in pdf-formaat). Het kan bijvoorbeeld\
+            \ ook een afbeelding (in bijvoorbeeld jpg-formaat) of een kaart (in bijvoorbeeld\
+            \ gmlformaat) betreffen. De mogelijkheid bestaat dat de inhoud in een\
+            \ (al dan niet separaat) bestand wordt uitgewisseld of dat er alleen verwezen\
+            \ wordt naar de locatie waar zich de inhoud bevindt. Hiertoe zijn de attribuutsoorten\
+            \ Bestandsnaam respectievelijk Link opgenomen. De content (data) van het\
+            \ enkelvoudig informatieobject in het formaat zoals gespecificeerd met\
+            \ de attribuutsoort 'Formaat'."
+          example: "Hier ziou in principe de volledige tekst van een infromatieobject\
+            \ opgenomen kunnen worden, maar dat zou teveel ruimte in beslag nemen.\
+            \ Vandaar dit voorbeeld."
+        creatiedatum:
+          type: "string"
+          title: "Creatiedatum"
+          description: "Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT.\
+            \ Deze datum verwijst gewoonlijk naar de creatie van het INFORMATIEOBJECT.\
+            \ Het betreft het Dublin Core metadata-element ‘Date’ met als toelichting:\
+            \ Typically, Date will be associated with the creation or availability\
+            \ of the resource. Recommended best practice for encoding the date value\
+            \ is defined in a profile of ISO 8601 (W3CDTF) and includes (among others)\
+            \ dates of the form YYYY-MM-DD. Alle geldige datums gelegen op of voor\
+            \ de huidige datum en tijd"
+          format: "date"
+        link:
+          type: "string"
+          title: "Link"
+          description: "De URL waarmee de inhoud van het INFORMATIEOBJECT op te vragen\
+            \ is. Vanwege vooral technische belemmeringen kan het voorkomen dat de\
+            \ attribuutsoort Inhoud geen waarde heeft d.w.z. dat de inhoud van het\
+            \ informatieobject ('het document' in het spraakgebruik) niet uitgewisseld\
+            \ wordt. Het attribuutsoort Link verwijst dan naar de locatie waar de\
+            \ inhoud van het informatieobject ('het document') zich bevindt en schept\
+            \ de mogelijkheid de Inhoud ('het document') op te vragen. Een meer structurelere\
+            \ wijze om de Inhoud op te vragen, is uiteraard met behulp van de Identificatie."
+          format: "uri"
+          example: "www.example.nl"
+        titel:
+          type: "string"
+          title: "Titel"
+          description: "De naam waaronder het INFORMATIEOBJECT formeel bekend is.\
+            \ Het betreft het Dublin Core metadata-element ‘Title’ met als toelichting:\
+            \ Typically, Title will be a name by which the resource is formally known.\
+            \ alle alfanumerieke tekens"
+          maxLength: 200
+          example: "Commissieverslag Red de Boom"
+        auteur:
+          type: "string"
+          title: "Auteur"
+          description: "De persoon of organisatie die in de eerste plaats verantwoordelijk\
+            \ is voor het creëren van de inhoud van het INFORMATIEOBJECT. Het kan\
+            \ zowel een medewerker of organisatorische eenheid van de zaakbehandelende\
+            \ organisatie betreffen als een externe partij (persoon of organisatie).\
+            \ Het betreft het Dublin Core metadata-element ‘Creator’ met als toelichting:\
+            \ Examples of Creator include a person, an organization, or a service.\
+            \ Typically, the name of a Creator should be used to indicate the entity.\
+            \ Van een ontvangen informatieobject kan de afzender de auteur zijn maar\
+            \ dat kan ook een ander zijn bijvoorbeeld in het geval dat de afzender\
+            \ een document van een derde meestuurt. Indien het informatieobject in\
+            \ een geautomatiseerd proces is vervaardigd, dan wordt als auteur vermeld\
+            \ degene die dat informatieobject ondertekend zou hebben dan wel, bij\
+            \ informatieobjecten waarbij van ondertekening geen sprake is (zoals bijvoorbeeld\
+            \ bij het omzetten van de zaakgegevens naar een duurzaam bewaarbaar informatieobject\
+            \ in pdf), degene die verantwoordelijk is voor de inhoud van het informatieobject\
+            \ vanuit zijn of haar rol bij de zaak (veelal degene in de rol van Zaakcoö\
+            rdinator). De naamgegevens van de auteur zijnde een betrokkene die in\
+            \ een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in\
+            \ een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk\
+            \ persoon of organisatie zijnde de auteur. In het laatste geval verdient\
+            \ het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap\
+            \ wordt uitgeoefend."
+          maxLength: 200
+          example: "Hendrik Janssen"
+        beschrijving:
+          type: "string"
+          title: "Beschrijving"
+          description: "Een generieke beschrijving van de inhoud van het INFORMATIEOBJECT.\
+            \ Het betreft het Dublin Core metadata-element ‘Description’ met als toelichting:\
+            \ Examples of Description include, but are not limited to, an abstract,\
+            \ table of contents, reference to a graphical representation of content,\
+            \ or free-text account of the content. alle alfanumerieke tekens"
+          maxLength: 1000
+          example: "Verslag van de commissievergadering om de boom voor het stadshuis\
+            \ de redden van de iepenziekte."
+        vertrouwelijkheidaanduiding:
+          $ref: "#/components/schemas/Vertrouwelijkheidaanduiding"
+        informatieobjecttypen:
+          type: "string"
+          format: "uri"
+          readOnly: true
+    Vertrouwelijkheidaanduiding:
+      type: "string"
+      description: "Aanduidingen van de mate waarin informatie voor de openbaarheid\
+        \ bestemd is. Nb. De waarden zijn afgeleid van het Besluit voorschrift informatiebeveiliging\
+        \ rijksdienst bijzondere informatie (VIRBI). De InformatieBeveiligingsDienst\
+        \ Gemeenten (IBD) kent vier vertrouwelijheidsniveaus die gemapt zouden kunnen\
+        \ worden op de hier gehateerde enumeratie (tussen haakjes): 0: openbaar (Openbaar)\
+        \ 1: bedrijfsvertrouwelijk (Beperkt openbaar, Intern) 2: vertrouwelijk (Zaakvertrouwelijk,\
+        \ Vertrouwelijk) 3: geheim (Confidentieel, Geheim, Zeer geheim).:\n* ZEER\
+        \ GEHEIM - ZEER GEHEIM\n* GEHEIM - GEHEIM\n* CONFIDENTIEEL - CONFIDENTIEEL\n\
+        * VERTROUWELIJK - VERTROUWELIJK\n* ZAAKVERTROUWELIJK - ZAAKVERTROUWELIJK\n\
+        * INTERN - INTERN\n* BEPERKT OPENBAAR - BEPERKT OPENBAAR\n* OPENBAAR - OPENBAAR"
+      enum:
+      - "ZEER GEHEIM"
+      - "GEHEIM"
+      - "CONFIDENTIEEL"
+      - "VERTROUWELIJK"
+      - "ZAAKVERTROUWELIJK"
+      - "INTERN"
+      - "BEPERKT OPENBAAR"
+      - "OPENBAAR"
+
