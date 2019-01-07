@@ -1178,7 +1178,7 @@ components:
             \ zowel op, voor of na de huidige datum en tijd"
           format: "date"
         vervalreden:
-          $ref: "#/components/schemas/Vervalreden"
+          $ref: "#/components/schemas/Vervalreden_enum"
         publicatiedatum:
           type: "string"
           title: "Publicatiedatum"
@@ -1221,7 +1221,7 @@ components:
           type: "string"
           format: "uri"
           readOnly: true
-    Vervalreden:
+    Vervalreden_enum:
       type: "string"
       description: "Benamingen van de gronden op basis waarvan een besluit is of komt\
         \ te vervallen.:\n* tijdelijk - Besluit met tijdelijke werking\n* ingetrokken_overheid\
