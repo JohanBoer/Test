@@ -1,1 +1,2195 @@
-q
+openapi: 3.0.0
+servers:
+  - description: "SwaggerHub API Auto Mocking"
+    url: https://virtserver.swaggerhub.com/VNGRealisatie/api/zaaktype_catalogus/v1
+  - description: "Referentie-implementatie"
+    url: https://www.voorbeeldgemeente.nl/api/zaaktype_catalogus/v1
+info:
+  title: Zaaktype Catalogus
+  description: "Introductie
+
+    -----------
+
+
+    De GEMMA Zaaktypecatalogus 2 (ZTC2, ofwel de 2e generatie zaaktypecatalogus) helpt gemeenten om het proces vanuit de ''vraag van een klant'' (productaanvraag, melding, aangifte, informatieverzoek e.d.) tot en met het leveren van een passend antwoord daarop in te richten, inclusief de bijbehorende  informatievoorziening. Opslag van gegevens gebeurt conform het    [Informatiemodel Zaaktypen/Zaaktypecatalogus(ImZTC, versie 2.1)](http://www.gemmaonline.nl/index.php/Informatiemodel_Zaaktypen_(ImZTC))
+    
+    
+
+    De catalogi worden middels een RESTful API ontsloten. Hierbij is zeer sterk gekeken naar het [Digitaal Stelsel Omgevingswet](https://aandeslagmetdeomgevingswet.nl/digitaal-stelsel/documenten/documenten/api-uri-strategie/) (DSO) voor de API- en URI strategie, en [StUF-ZTC](https://www.gemmaonline.nl/index.php/Sectormodel_Zaaktypen(-catalogus):_StUF%E2%80%93ZTC) om zo goed mogelijk aan te sluiten op de services zoals deze zijn gedefinieerd in SOAP.
+
+
+
+    Waarschuwing
+
+    ------------
+
+    Hoewel op dit moment versie 1 van de API beschikbaar is, kunnen er breaking    changes voorkomen zolang de Zaaktypecatalogus nog niet versie 1.0.0 heeft bereikt.'
+"
+  version: "1.0"
+  contact:
+    url: https://github.com/VNG-Realisatie/gemma-zaken/
+    email: johan.boer@VNG.NL
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+security:
+-	JWT-Claims: [] 
+paths:
+  /catalogussen/{catalogus_uuid}/besluittypen/{uuid}:
+    get:
+      operationId: catalogussenCatalogus_uuidbesluittypenUuid
+      description: "Een BESLUITTYPE van de besluiten die het resultaat kunnen zijn van het zaakgericht werken van de behandelende organisatie(s)."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Besluittype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/besluittypen:
+    get:
+      operationId: catalogussenCatalogus_uuidbesluittypen
+      description: "Alle BESLUITTYPEn van de besluiten die het resultaat kunnen zijn van het zaakgericht werken van de behandelende organisatie(s)."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Besluittype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen/{zaaktype_uuid}/roltypen:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypenZaaktype_uuidroltypen
+      description: "Het ophalen van een collectie roltypen . Een roltype is een generieke aanduiding van de aard van een ROL die een BETROKKENE kan uitoefenen in ZAAKen van een ZAAKTYPE."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: zaaktype_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: query
+          name: omschrijvinggeneriek
+          description: "Algemeen gehanteerde omschrijving van de aard van de ROL. Het gaat hier om een korte omschrijving van de aard van de rol, zoals deze landelijk wordt toegepast. Deze kan afwijken van de door de zaakbehandelende organisatie(s) gehanteerde naam, de Roltypeomschrijving."
+          required: false
+          schema:
+              $ref: "#/components/schemas/RoltypeomschrijvingGeneriek"
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Roltype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{uuid}:
+    get:
+      operationId: catalogussenUuid
+      description: "Het ophalen van een catalogus. Een catalogus is een verzameling van ZAAKTYPEn - incl. daarvoor relevante objecttypen - voor een Domein die als één geheel beheerd wordt."
+      parameters: 
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalogus'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen:
+    get:
+      operationId: catalogussen
+      description: "Het ophalen van de collectie catalogussen. Een catalogus is een verzameling van ZAAKTYPEn - incl. daarvoor relevante objecttypen - voor een Domein die als één geheel beheerd wordt"
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/informatieobjecttypen:
+    get:
+      operationId: catalogussenCatalogus_uuidinformatieobjecttypen
+      description: ""
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Informatieobjecttype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/informatieobjecttypen/{uuid}:
+    get:
+      operationId: catalogussenCatalogus_uuidinformatieobjecttypenUuid
+      description: "Het ophalen van een informatieobjecttype. Eeen informatieobjecttype is een aanduiding van de aard van INFORMATIEOBJECTen zoals gehanteerd door de zaakbehandelende organisatie."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Informatieobjecttype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen/{zaaktype_uuid}/eigenschappen/{uuid}:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypenZaaktype_uuideigenschappenUuid
+      description: "Het ophalen van een eigenschap . Een eigenschap is een relevant inhoudelijk gegeven dat bij ZAAKen van dit ZAAKTYPE geregistreerd moet kunnen worden en geen standaard kenmerk is van een zaak."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: zaaktype_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Eigenschap'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen/{zaaktype_uuid}/statustypen/{uuid}:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypenZaaktype_uuidstatustypenUuid
+      description: "Het ophalen van een statustype. Een statustype is een generieke aanduiding van de aard van een STATUS"
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: zaaktype_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statustype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen/{zaaktype_uuid}/roltypen/{uuid}:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypenZaaktype_uuidroltypenUuid
+      description: "Het ophalen van een rotltype . Een roltype is een generieke aanduiding van de aard van een ROL die een BETROKKENE kan uitoefenen in ZAAKen van een ZAAKTYPE."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: zaaktype_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Roltype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen/{uuid}:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypenUuid
+      description: "Ophalen van een zaaktype. Een zaaktype is een specificatie van de wijze van besturing van, en vast te leggen informatie over een bedrijfsproces dat als zaak uitgevoerd wordt."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zaaktype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen/{zaaktype_uuid}/eigenschappen:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypenZaaktype_uuideigenschappen
+      description: "Het ophalen van een collectie eigenschappen. Een eigenschap is een relevant inhoudelijk gegeven dat bij ZAAKen van dit ZAAKTYPE geregistreerd moet kunnen worden en geen standaard kenmerk is van een zaak."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: zaaktype_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Eigenschap'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen/{zaaktype_uuid}/statustypen:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypenZaaktype_uuidstatustypen
+      description: "Het ophalen van een collectie statustypen. Een statustype is een generieke aanduiding van de aard van een STATUS"
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: zaaktype_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Statustype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+  /catalogussen/{catalogus_uuid}/zaaktypen:
+    get:
+      operationId: catalogussenCatalogus_uuidzaaktypen
+      description: "Ophalen van een collectie zaaktypen. Een zaaktype is een specificatie van de wijze van besturing van, en vast te leggen informatie over een bedrijfsproces dat als zaak uitgevoerd wordt."
+      parameters: 
+        - in: path
+          name: catalogus_uuid
+          description: "Een UUID is een nummer van 128 bits (= 16 bytes). UUID wordt weergegeven in 32 ??hexadecimale cijfers. Deze cijfers zijn ingedeeld in vijf groepen, in ongelijk aantal en gescheiden door koppeltekens: 8-4-4-4-12 In zijn geheel wordt een UUID dus door 36 tekens gevormd, waarvan 32 hexadecimale karakters en vier streepjes. In [RFC4122](https://tools.ietf.org/html/rfc4122) wordt de structuur van de UUID beschreven."
+          required: true
+          schema:
+            type: string
+            maxLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zaaktype'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Catalogussen
+components:
+  schemas:
+    Besluittype:
+      type: "object"
+      description: "Generieke aanduiding van de aard van een besluit Het betreft de\
+        \ indeling of groepering van besluiten naar hun aard, zoals bouwvergunning,\
+        \ ontheffing geluidhinder en monumentensubsidie"
+      required:
+      - "omschrijving"
+      - "zaaktypen"
+      - "catalogussen"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        omschrijving:
+          type: "string"
+          title: "Besluittype-omschrijving"
+          description: "Omschrijving van de aard van BESLUITen van het BESLUITTYPE.\
+            \ Het gaat hier om een korte omschrijving van de aard van het besluit,\
+            \ ook wel besluitnaam genoemd. Voorbeelden: Lichte bouwvergunning, Kapvergunning,\
+            \ Ontheffing geluidhinder en Monumentensubsidie. Het betreft de attribuutsoort\
+            \ Beschikkingomschrijving in het GFO Zaken 2004."
+          maxLength: 80
+          example: "Besluit dat door de gemeenteraad vanTurfbrug is genomen"
+        omschrijvingGeneriek:
+          type: "string"
+          title: "Besluittype-omschrijving generiek"
+          description: "Algemeen gehanteerde omschrijving van de aard van BESLUITen\
+            \ van het BESLUITTYPE Het gaat hier om een korte omschrijving van de aard\
+            \ van het besluit, ook wel besluitnaam genoemd, zoals deze landelijk wordt\
+            \ toegepast binnen de ZTC voor het domein waarvan het zaaktype is afgeleid.\
+            \ Deze kan afwijken van de door de zaakbehandelende organisatie(s) gehanteerde\
+            \ naam, de Besluittype-omschrijving."
+          maxLength: 80
+          example: "Een besluit dat door een gemeenteraad is genomen."
+        besluitcategorie:
+          type: "string"
+          title: "Besluitcategorie"
+          description: "Typering van de aard van BESLUITen van het BESLUITTYPE. Het\
+            \ gaat hier om de indeling van besluittypen naar categorieën zoals Vergunning,\
+            \ Ontheffing en Subsidie."
+          maxLength: 40
+          example: "Raadsbesluit"
+        reactietermijn:
+          type: "string"
+          title: "Reactietermijn"
+          description: "Het aantal dagen, gerekend vanaf de verzend- of publicatiedatum,\
+            \ waarbinnen verweer tegen een besluit van het besluittype mogelijk is.\
+            \ Er wordt gebruik gemaakt van [ISO-8601 durations](https://en.wikipedia.org/wiki/ISO_8601#Durations).\
+            \ De telling begint bij de dag volgend op de verzend- of publicatiedatum.\
+            \ Indien geen sprake is van een reactietermijn dan is de waarde nul."
+          example: "D2"
+        publicatieIndicatie:
+          type: "boolean"
+          title: "Publicatie-indicatie"
+          description: "Aanduiding of BESLUITen van dit BESLUITTYPE gepubliceerd moeten\
+            \ worden. Het gaat hier niet alleen om de wettelijke verplichting tot\
+            \ publicatie maar ook om de eigen keuze van de organisatie die besluiten\
+            \ van dit type neemt."
+          example: "true"
+        publicatietekst:
+          type: "string"
+          title: "Publicatietekst"
+          description: "De generieke tekst van de publicatie van BESLUITen van dit\
+            \ BESLUITTYPE"
+          maxLength: 1000
+          example: "Dit is een generieke tekst die bij ieder besluit van dit besluittype\
+            \ gepubliceerd wordt, naast de inhoud van het besluit zelf."
+        publicatietermijn:
+          type: "string"
+          title: "Publicatietermijn"
+          description: "Het aantal dagen, gerekend vanaf de verzend- of publicatiedatum,\
+            \ dat BESLUITen van dit BESLUITTYPE gepubliceerd moeten blijven. De telling\
+            \ begint bij de dag volgend op de verzend- of publicatiedatum."
+          example: "D21"
+        toelichting:
+          type: "string"
+          title: "Toelichting"
+          description: "Een eventuele toelichting op dit BESLUITTYPE. Deze attribuutsoort\
+            \ heeft vooral een documentatiefunctie en is bedoeld om een toelichting\
+            \ te geven op dit BESLUITTYPE. Hier kan bijvoorbeeld een beschrijving\
+            \ worden gegeven van de betekenis van het besluit voor - het verloop van\
+            \ - een ZAAKTYPE."
+          maxLength: 1000
+          example: "Een eventuele toelichting die bij dit besluittype gewenst is kan\
+            \ hier worden opgenomen."
+        zaaktypen:
+          title: "isRelevantVoor"
+          type: "array"
+          description: "De BESLUITTYPEn die relevant kunnen zijn voor ZAAKen van dit\
+            \ ZAAKTYPE Niet elk BESLUITTYPE is relevant voor ZAAKen van een ZAAKTYPE.\
+            \ Zo is het BESLUITTYPE met Besluittype-omschrijving generiek 'Handhavingsbesluit'\
+            \ erg relevant voor zaaktypen die betrekking hebben op handhaving, maar\
+            \ bijvoorbeeld niet voor behandelen van een aanvraag voor een reisdocument\
+            \ of een melding geslachtsnaamwijziging, et cetera. Deze relatiesoort\
+            \ is opgenomen om bij een ZAAKTYPE vast te kunnen leggen welke deelverzameling\
+            \ BESLUITTYPEn relevant kan zijn voor ZAAKen van dit ZAAKTYPE en behandelaren\
+            \ zo een overzichtelijke lijst met besluittypen te kunnen presenteren."
+          minItems: 1
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        informatieobjecttypen:
+          title: "wordtVastgelegdIn"
+          type: "array"
+          description: "Het INFORMATIEOBJECTTYPE van informatieobjecten waarin besluiten\
+            \ van dit BESLUITTYPE worden vastgelegd."
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        catalogussen:
+          type: "string"
+          format: "uri"
+          readOnly: true
+    Roltype:
+      type: "object"
+      description: "Generieke aanduiding van de aard van een ROL die een BETROKKENE\
+        \ kan uitoefenen in ZAAKen van een ZAAKTYPE. Zowel in de GEMMA-procesarchitectuur,\
+        \ het RGBZ als de ZTC komt het begrip ‘rol’ voor. De interpretatie daarvan\
+        \ hebben we geharmoniseerd. Onder ‘rol’ verstaan we de aard van de bijdrage\
+        \ die een extern persoon, medewerker, afdeling, bedrijf e.d. levert aan de\
+        \ behandeling van een zaak cq. de uitvoering van een bedrijfsproces. Het gaat\
+        \ hierbij om ‘wat’ iemand doet, niet om ‘wie’ het doet. Het gaat dus niet\
+        \ om functies van medewerkers binnen een organisatie maar om de taken die\
+        \ iemand uitvoert. Een rol kan in praktijksituaties dan ook toegewezen worden\
+        \ aan diverse functionarissen, afdelingen en externen. Ook kan het voor komen\
+        \ dat één medewerker meerdere rollen vervult of dat meerdere medewerkers samen\
+        \ één rol vervullen. Rolbenamingen zijn veelal specifiek voor het zaak- of\
+        \ procestype: subsidieaanvrager, inspecteur, juridisch adviseur, vergunningbehandelaar,\
+        \ bezwaarindiener, klager, etcetera. Om bij uitwisseling van zaak- en procesgegevens\
+        \ (binnen en tussen organisaties) te bereiken dat rolbenamingen juist geï\
+        nterpreteerd worden, hanteren we generieke rolbenamingen. Per zaaktype en\
+        \ proces kunnen deze verbijzonderd of zelfs uitgesplitst worden naar context-specifieke\
+        \ benamingen. Waar gesproken wordt van ‘zaak’ bedoelen we zowel ‘hoofdzaak’\
+        \ als ‘deelzaak’."
+      required:
+      - "omschrijving"
+      - "omschrijvingGeneriek"
+      - "mogelijkeBetrokkene"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        omschrijving:
+          type: "string"
+          title: "Roltypeomschrijving"
+          description: "Omschrijving van de aard van de ROL. alle alfanumerieke tekens"
+          maxLength: 20
+          example: "Initiator"
+        omschrijvingGeneriek:
+          $ref: "#/components/schemas/RoltypeomschrijvingGeneriek"
+        mogelijkeBetrokkene:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/MogelijkeBetrokkene"
+        zaaktypen:
+          type: "string"
+          format: "uri"
+          readOnly: true
+    Catalogus:
+      type: "object"
+      description: "De verzameling van ZAAKTYPEn - incl. daarvoor relevante objecttypen\
+        \ - voor een Domein die als één geheel beheerd wordt. Voor de inzet van de\
+        \ CATALOGUS in één uitvoerende organisatie (bijv. een gemeente) gaat KING\
+        \ ervan uit dat binnen de organisatie één CATALOGUS wordt gebruikt met alle\
+        \ ZAAKTYPEn van de organisatie. De unieke identificatie in dit voorbeeld wordt\
+        \ dan de combinatie van het Domein 'Gemeente', gevolgd door het RSIN van de\
+        \ betreffende gemeente. Standaardiserende organisaties zullen mogelijk meerdere\
+        \ catalogi willen publiceren en beheren. Denk aan een ministerie dat voor\
+        \ meerdere sectoren een CATALOGUS aanlegt. Via het Domein-attribuut krijgt\
+        \ zo elke CATALOGUS toch een unieke identificatie. KING bepaalt niet op voorhand\
+        \ welke waarden 'Domein' kan aannemen, maar registreert wel alle gebruikte\
+        \ waarden."
+      required:
+      - "domein"
+      - "rsin"
+      - "contactpersoonBeheerNaam"
+      - "zaaktypen"
+      - "besluittypen"
+      - "informatieobjecttypen"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        domein:
+          type: "string"
+          title: "Domein"
+          description: "Een afkorting waarmee wordt aangegeven voor welk domein in\
+            \ een CATALOGUS ZAAKTYPEn zijn uitgewerkt. Voor de waardenverzameling\
+            \ wordt door KING een waardenlijst beheerd waarin wordt bijgehouden welke\
+            \ afkorting welk domein betreft. Hoofdletters"
+          maxLength: 5
+        rsin:
+          type: "string"
+          title: "RSIN"
+          description: "Het door een kamer toegekend uniek nummer voor de INGESCHREVEN\
+            \ NIET-NATUURLIJK PERSOON die de eigenaar is van een CATALOGUS. Getal\
+            \ van 9 cijfers met eventueel voorloopnullen."
+          maxLength: 9
+        contactpersoonBeheerEmailadres:
+          type: "string"
+          title: "Contactpersoon beheer emailadres"
+          description: "Het emailadres van de contactpersoon die verantwoordelijk\
+            \ is voor het beheer van de CATALOGUS. Default: conform RFC 5321 en RFC\
+            \ 5322"
+          maxLength: 254
+          example: "infor@vng.nl"
+        contactpersoonBeheerNaam:
+          type: "string"
+          title: "Contactpersoon beheer naam"
+          description: "De naam van de contactpersoon die verantwoordelijk is voor\
+            \ het beheer van de CATALOGUS. alle alfanumerieke tekens"
+          maxLength: 40
+          example: "Kees Karelse"
+        contactpersoonBeheerTelefoonnummer:
+          type: "string"
+          title: "Contactpersoon beheer telefoonnummer"
+          description: "Het telefoonnummer van de contactpersoon die verantwoordelijk\
+            \ is voor het beheer van de CATALOGUS. Het type is alfanumeriek zodat\
+            \ eventuele toevoegingen als 'bgg', 'zak' of 'mobiel' kunnen worden verwerkt.\
+            \ alle alfanumerieke tekens"
+          maxLength: 20
+        zaaktypen:
+          title: "bestaatUit"
+          type: "array"
+          description: "De CATALOGUS waartoe dit ZAAKTYPE behoort."
+          minItems: 1
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        besluittypen:
+          title: "heeftAlsOnderdeel"
+          type: "array"
+          description: "De CATALOGUS waartoe dit BESLUITTYPE behoort."
+          minItems: 1
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        informatieobjecttypen:
+          title: "heeftAlsOnderdeel"
+          type: "array"
+          description: "De CATALOGUS waartoe dit INFORMATIEOBJECTTYPE behoort."
+          minItems: 1
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+    Informatieobjecttype:
+      type: "object"
+      description: "Aanduiding van de aard van INFORMATIEOBJECTen zoals gehanteerd\
+        \ door de zaakbehandelende organisatie. ‘Informatieobject’ is een generiekere\
+        \ term voor het veelgebruikte begrip ‘document’ dat beperkter van reikwijdte\
+        \ is. Een informatieobject kan van alles zijn, ongeacht aard en vorm: een\
+        \ tekstverwerkingsdocument, een papieren brief, een webpagina, een landkaart,\
+        \ een foto, een geluidsopname, een dataset, een blog, etcetera. En ook een\
+        \ digitaal ontvangen of gecreeerd informatieobject dat bestaat uit meerdere\
+        \ fysieke informatieobjecten, zoals een aanvraag (als tekstdocument) met bijbehorende\
+        \ tekening (CAD-formaat) en berekening (spreadsheet) of een email met bijlage(n).\
+        \ Net zoals dezelfde aanvraag op papier met bijlagen als één informatieobject\
+        \ beschouwd kan worden. De fysieke vorm van hetgeen ontvangen of gecreeerd\
+        \ is, is dus niet (alleen) bepalend voor de afbakening van dat wat als informatieobject\
+        \ beschouwd wordt. Voor de leesbaarheid hanteren we in toelichtingen in dit\
+        \ informatiemodel hier en daar wel de term ‘document’ waarmee we formeel ‘\
+        informatieobject’ bedoelen. Het INFORMATIEOBJECTTYPE betreft de typering van\
+        \ informatieobjecten naar hun aard zoals gehanteerd door de zaakbehandelende\
+        \ organisatie. Elk informatieobjecttype komt overeen met of valt binnen de\
+        \ generieke typering van informatieobjecten zoals landelijk gehanteerd, de\
+        \ informatieobjecttype-omschrijving generiek . Het informatieobjecttype stelt\
+        \ organisatie in staat hun eigen typering aan te houden en, d.m.v. de relatie\
+        \ naar Informatieobjecttype-omschrijving generiek, toch aan te kunnen sluiten\
+        \ op de landelijk gehanteerde typering generiek."
+      required:
+      - "omschrijving"
+      - "catalogussen"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        omschrijving:
+          type: "string"
+          title: "Informatieobjecttype-omschrijving"
+          description: "Omschrijving van de aard van informatieobjecten van dit INFORMATIEOBJECTTYPE.\
+            \ Het gaat hier om een korte omschrijving van de aard van gelijksoortige\
+            \ informatieobjecttypen, ook wel documentsoort genoemd. Voorbeelden: Bouwaanvraag,\
+            \ Kapvergunning, Taxatieverslag, Geboorte-akte. Het betreft het Dublin\
+            \ Core metadata-element ‘Subject’ met als toelichting: Typically, Subject\
+            \ will be expressed as keywords, key phrases, or classification codes\
+            \ that describe a topic of the resource. Recommended best practice is\
+            \ to select a value from a controlled vocabulary or formal classification\
+            \ scheme. Aan te bevelen is dus om aan te sluiten bij een (landelijke)\
+            \ domeinwaardencatalogus zoals gemodelleerd met informatieobjecttype-omschrijving\
+            \ generiek Let op dat het hier alleen om het onderwerp gaat; trefwoorden\
+            \ worden vastgelegd in Informatieobjecttypetrefwoord. alle alfanumerieke\
+            \ tekens"
+          maxLength: 80
+          example: "Dit is een omschrijvingtekst van het INFORMATIEOBECTTYPE."
+        catalogussen:
+          type: "string"
+          format: "uri"
+          readOnly: true
+    Eigenschap:
+      type: "object"
+      description: "Een relevant inhoudelijk gegeven dat bij ZAAKen van dit ZAAKTYPE\
+        \ geregistreerd moet kunnen worden en geen standaard kenmerk is van een zaak.\
+        \ Met standaard kenmerken van een zaak worden bedoeld de attributen die in\
+        \ het RGBZ gespecificeerd zijn bij ZAAK en bij de andere daarin opgenomen\
+        \ objecttypen. Deze kenmerken zijn generiek d.w.z. van toepassing op elke\
+        \ zaak, ongeacht het zaaktype. Niet voor elke zaak van elk zaaktype is dit\
+        \ voldoende informatie voor de behandeling van de zaak, de besturing daarvan\
+        \ en om daarover informatie uit te kunnen wisselen. Zo is voor het behandelen\
+        \ van een aanvraag voor een kapvergunning informatie nodig over de locatie,\
+        \ het type en de diameter van de te kappen boom. Het RGBZ bevat reeds de locatie-kenmerken.\
+        \ Boomtype en Stamdiameter zijn gegevens die specifiek zijn voor zaken van\
+        \ dit zaaktype, de zaaktypespecifieke eigenschappen. Een ander voorbeeld is\
+        \ de evenementdatum bij de behandeling van een aanvraag voor een evenementenvergunning.\
+        \ Met het specificeren van eigenschappen wordt ten eerste beoogd duidelijkheid\
+        \ te geven over de voor een zaaktype relevante eigenschappen en wordt ten\
+        \ tweede beoogd die eigenschappen zodanig te specificeren dat waarden van\
+        \ deze eigenschappen in StUF-ZKN-berichten uitgewisseld kunnen worden. Met\
+        \ de attributen van het objecttype EIGENSCHAP wordt een zaaktypespecifieke\
+        \ eigenschap gespecificeerd. De attributen Eigenschapnaam en Definitie duiden\
+        \ de eigenschap. De eigenschap wordt gegevenstechnisch gespecificeerd met\
+        \ één van twee groepen attributen: a) Groep, Formaat, Lengte, Kardinaliteit\
+        \ en Waardenverzameling. Het attribuut ‘Groep’ maakt het mogelijk om eigenschappen\
+        \ te groeperen naar een object of een groepattribuut en, met een StUF-ZKN-bericht,\
+        \ de waarden van de bij een groep behorende eigenschappen voor meerdere objecten\
+        \ uit te wisselen (bijvoorbeeld een ‘kapvergunning’ voor meerdere bomen die\
+        \ ieder apart geduid worden). b) Objecttype, Informatiemodel, Namespace, Schemalocatie,\
+        \ X-path element en Entiteittype. Deze specificeren een eigenschap door te\
+        \ refereren naar een berichtenmodel en, bij voorkeur ook, een informatiemodel.\
+        \ De eigenschap wordt aldus ontleend aan een XML-schema (als onderdeel van\
+        \ een berichtenmodel) dat reeds bestaat of specifiek voor het zaaktype (of\
+        \ de zaaktypecatalogus) is opgesteld. Voor een goed begrip van de eigenschap\
+        \ is het dringend gewenst dat deze semantisch gespecificeerd is in een informatiemodel\
+        \ met het oog op eenduidig te interpreteren uitwisseling van waarden van de\
+        \ eigenschap. Het betreft het informatiemodel dat opgesteld is voor het domein\
+        \ waarvoor de zaaktypen gespecificeerd worden en op basis waarvan het XML-schema\
+        \ is vervaardigd. De specificatie ad. a ondersteunt de mogelijkheid om waarden\
+        \ van deze eigenschappen, bij een specifieke zaak, uit te wisselen tussen\
+        \ applicaties ten behoeve van gebruik van deze gegevens door de gebruikers\
+        \ van deze applicaties. De gebruikers kunnen deze gegevens interpreteren,\
+        \ de uitwisselende applicaties kennen deze gegevens, zonder voorafgaande afspraken,\
+        \ niet zodanig dat zij daar betrouwbaar bewerkingen op kunnen baseren anders\
+        \ dan tonen en eventueel wijzigen en opslaan. De specificatie ad. b ondersteunt\
+        \ de mogelijkheid om waarden van deze eigenschappen, bij een specifieke zaak,\
+        \ uit te wisselen tussen applicaties die deze gegevens (willen) kennen teneinde\
+        \ daarop betrouwbaar bewerkingen te doen of te baseren (bijvoorbeeld uit de\
+        \ diameter, type en plaats van de boom afleiden of de vergunning verleend\
+        \ kan worden of niet)."
+      required:
+      - "naam"
+      - "definitie"
+      - "ingangsdatumObject"
+      - "zaaktypen"
+      properties:
+        naam:
+          type: "string"
+          title: "Eigenschapnaam"
+          description: "De naam van de EIGENSCHAP Het betreft de naam van het attribuut\
+            \ in het desbetreffende informatiemodel of, indien de eigenschap niet\
+            \ aan een informatiemodel ontleend is, de semantische naam van de eigenschap\
+            \ (i.t.t. de elementnaam in een XML-schema). Indien eigenschappen gespecificeerd\
+            \ worden door te refereren naar een berichtenmodel cq. namespace, dan\
+            \ kan de eigenschap overeenkomen met een ComplexType (entiteittype). Daarmee\
+            \ wordt aangegeven dat alle elementen van dat entiteittype zaakspecifieke\
+            \ eigenschappen bij het zaaktype zijn. alle alfanumerieke tekens"
+          maxLength: 20
+          example: "Functie indiener"
+        definitie:
+          type: "string"
+          title: "Definitie"
+          description: "De beschrijving van de betekenis van deze EIGENSCHAP Eigenschappen\
+            \ vormen een krachtige en flexibele functionaliteit voor het registreren\
+            \ van relevante kenmerken voor ZAAKen van een specifiek ZAAKTYPE. Die\
+            \ kracht staat of valt echter met een heldere, eenduidige definitie van\
+            \ de EIGENSCHAP. Bijvoorbeeld: `De omtrek van de boom, gemeten op een\
+            \ hoogte van 1 meter boven het maaiveld.` De definitie wordt, indien van\
+            \ toepassing, ontleend aan het informatiemodel waarin de eigenschap is\
+            \ gemodelleerd. alle alfanumerieke tekens"
+          maxLength: 255
+          example: "De functie die ene indiener binnen zijn organisatie bekleed."
+        toelichting:
+          type: "string"
+          title: "Toelichting"
+          description: "Een toelichting op deze EIGENSCHAP en het belang hiervan voor\
+            \ zaken van dit ZAAKTYPE. alle alfanumerieke tekens"
+          maxLength: 1000
+          example: "De functie van de indiener kan relevant zijn voor het afhandeling\
+            \ van zaken van dit zaaktype."
+        ingangsdatumObject:
+          type: "string"
+          title: "Datum begin geldigheid eigenschap"
+          description: "De datum waarop de EIGENSCHAP is ontstaan. Met deze datum\
+            \ wordt aangegeven vanaf wanneer de eigenschap bij het zaaktype bestaat\
+            \ en toegepast kan worden. Dit vindt plaats met ingang van een versie\
+            \ van het zaaktype d.w.z. niet op tussenliggende datums."
+          format: "date"
+          example: "19-11-2018"
+        einddatumObject:
+          type: "string"
+          title: "Datum einde geldigheid eigenschap"
+          description: "De datum waarop de EIGENSCHAP is opgeheven. Met deze datum\
+            \ wordt aangegeven vanaf wanneer de eigenschap niet meer bestaat en niet\
+            \ meer toegepast kan worden bij het zaaktype. Dit vindt alleen plaats\
+            \ bij een overgang naar een nieuwe versie van het zaaktype d.w.z. niet\
+            \ op tussenliggende datums."
+          format: "date"
+        specificatie:
+          $ref: "#/components/schemas/Specificatie"
+        zaaktypen:
+          type: "string"
+          format: "uri"
+          readOnly: true
+    Statustype:
+      type: "object"
+      description: "Generieke aanduiding van de aard van een STATUS Zaken van eenzelfde\
+        \ zaaktype doorlopen alle dezelfde statussen, tenzij de zaak voortijdig beeë\
+        indigd wordt. Met STATUSTYPE worden deze statussen benoemd bij het desbetreffende\
+        \ zaaktype. De attribuutsoort ‘Doorlooptijd status’ is niet bedoeld om daarmee\
+        \ voor een individuele zaak de statussen te plannen maar om geïnteresseerden\
+        \ informatie te verschaffen over de termijn waarop normaliter een volgende\
+        \ status bereikt wordt."
+      required:
+      - "volgnummer"
+      - "omschrijving"
+      - "isEindstatus"
+      - "zaaktypen"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        volgnummer:
+          type: "integer"
+          title: "Statustypevolgnummer"
+          description: "Een volgnummer voor statussen van het STATUSTYPE binnen een\
+            \ zaak. Een zaak van een bepaald ZAAKTYPE doorloopt achtereenvolgens de\
+            \ statussen overeenkomstig de aan het ZAAKTYPE gerelateerde STATUSTYPEN.\
+            \ Het volgnummer legt de volgorde vast waarin de statussen doorlopen worden\
+            \ 0001 - 9999"
+          example: "1234"
+        omschrijving:
+          type: "string"
+          title: "Statustype-omschrijving"
+          description: "Een korte, voor de initiator van de zaak relevante, omschrijving\
+            \ van de aard van de STATUS van zaken van een ZAAKTYPE. Het betreft de\
+            \ attribuutsoort Status.Statusomschrijving in het GFO Zaken 2004 met dien\
+            \ verstande dat deze nu van toepassing is per Statustype, d.w.z. voor\
+            \ alle daarbij te registreren Statussen, en niet per status bepaald kan\
+            \ worden. Voorbeelden hiervan zijn “Aanvraag ontvangen”, “Äanvraag ontvankelijk”\
+            , “Aanvraag in behandeling”, “Voorstel bij B&W” en “Aanvraag afgehandeld”\
+            . alle alfanumerieke tekens"
+          maxLength: 80
+          example: "Nieuw"
+        omschrijvingGeneriek:
+          type: "string"
+          title: "Statustype-omschrijving generiek"
+          description: "Algemeen gehanteerde omschrijving van de aard van STATUSsen\
+            \ van het STATUSTYPE Het gaat hier om een korte omschrijving van de aard\
+            \ van de status zoals deze landelijk wordt toegepast. Deze kan afwijken\
+            \ van de door de zaakbehandelende organisatie(s) gehanteerde naam, de\
+            \ Statustypeomschrijving. alle alfanumerieke tekens"
+          maxLength: 80
+          example: "Dit is de omschrijvingGeneriek van het statusType."
+        statustekst:
+          type: "string"
+          title: "Statustekst"
+          description: "De tekst die wordt gebruikt om de Initiator te informeren\
+            \ over het bereiken van een STATUS van dit STATUSTYPE bij het desbetreffende\
+            \ ZAAKTYPE. alle alfanumerieke tekens"
+          maxLength: 1000
+          example: "Dit is een uitgebreide statustekst."
+        isEindstatus:
+          type: "boolean"
+          title: "isEindstatus"
+          description: "Geeft aan dat dit STATUSTYPE een eindstatus betreft. Dit gegeven\
+            \ is afgeleid uit alle STATUSTYPEn van dit ZAAKTYPE met het hoogste volgnummer."
+          example: "true"
+        zaaktypen:
+          type: "string"
+          format: "uri"
+          readOnly: true
+    Zaaktype:
+      type: "object"
+      description: "Specificatie van de wijze van besturing van, en vast te leggen\
+        \ informatie over een bedrijfsproces dat als zaak uitgevoerd wordt. Het betreft\
+        \ de indeling of groepering van zaken naar hun aard, zoals “Behandelen aanvraag\
+        \ bouwvergunning” en “Behandelen aanvraag ontheffing parkeren”. Wat in een\
+        \ individueel geval een zaak is, waar die begint en waar die eindigt, wordt\
+        \ bekeken vanuit het perspectief van de initiator van de zaak (burger, bedrijf,\
+        \ medewerker, etc.). Het traject van (aan)vraag cq. aanleiding voor de zaak\
+        \ tot en met de levering van de producten/of diensten die een passend antwoord\
+        \ vormen op die aanleiding, bepaalt de omvang en afbakening van de zaak en\
+        \ daarmee van het zaaktype. Hiermee komt de afbakening van een zaaktype overeen\
+        \ met een bedrijfsproces: ‘van klant tot klant’. Dit betekent ondermeer dat\
+        \ onderdelen van bedrijfsprocessen geen zelfstandige zaken vormen. Het betekent\
+        \ ook dat een aanleiding die niet leidt tot de start van de uitvoering van\
+        \ een bedrijfsproces, niet leidt tot een zaak (deze wordt behandeld in het\
+        \ kader van een reeds lopende zaak). Zie ook de toelichtingen bij de relatiesoorten\
+        \ ‘ZAAKTYPE is deelzaaktype van ZAAKTYPE’ en ‘ZAAKTYPE heeft gerelateerd ZAAKTYPE’\
+        \ voor wat betreft zaaktypen van deelzaken respectievelijk gerelateerde zaken."
+      required:
+      - "identificatie"
+      - "omschrijving"
+      - "doorlooptijd"
+      - "catalogussen"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        identificatie:
+          type: "integer"
+          title: "Zaaktype-identificatie"
+          description: "Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS\
+            \ waarin het ZAAKTYPE voorkomt. Deze attribuutsoort identificeert een\
+            \ ZAAKTYPE uniek binnen de CATALOGUS waarin het ZAAKTYPE voorkomt, ook\
+            \ als daarin meerdere versies - onderscheiden door Datum begin geldigheid\
+            \ zaaktype en Datum einde geldigheid zaaktype - van een ZAAKTYPE voorkomen."
+          example: "33425"
+        omschrijving:
+          type: "string"
+          title: "Zaaktype-omschrijving"
+          description: "Omschrijving van de aard van ZAAKen van het ZAAKTYPE. Het\
+            \ betreft de gelijknamige attribuutsoort bij Zaak in het GFO Zaken 2004.\
+            \ Binnen een catalogus heeft elke zaaktype een unieke naam, de Zaaktype-omschrijving.\
+            \ alle alfanumerieke tekens"
+          maxLength: 80
+          example: "Dit is een omschrijvingen van het zaaktype."
+        omschrijvingGeneriek:
+          type: "string"
+          title: "Zaaktype-omschrijving generiek"
+          description: "Algemeen gehanteerde omschrijving van de aard van ZAAKen van\
+            \ het ZAAKTYPE Het gaat hier om een korte omschrijving van de aard van\
+            \ de zaak, ook wel zaaknaam genoemd, zoals deze binnen een Domein wordt\
+            \ toegepast. Deze kan afwijken van de door de zaakbehandelende organisatie(s)\
+            \ gehanteerde naam, de Zaaktype-omschrijving. De domeinwaarden zijn opgenomen\
+            \ in de CATALOGUS van het betreffende Domein. De waarden van 'Zaaktype\
+            \ omschrijving' zoals opgenomen in de Catalogus met standaard zaaktypen\
+            \ van het betreffende Domein."
+          maxLength: 80
+          example: "Dit is een omschrijvingGeneriek van een zaaktype."
+        doorlooptijd:
+          type: "string"
+          title: "Periodeduur"
+          description: "Het aantal tijdseenheden van de doorlooptijd Dit element een\
+            \ een technische invulling van de gegevensgroep *doorlooptijdBehandelingZaaktype*\
+            \ uit het IMZTC. (De periode waarbinnen volgens wet- en regelgeving een\
+            \ ZAAK van het ZAAKTYPE afgerond dient te zijn. ) Er wordt gebruik gemaakt\
+            \ van [ISO-8601 durations](https://en.wikipedia.org/wiki/ISO_8601#Durations).\
+            \ Afhankelijk van de waarde van ‘Periode-eenheid’ betreft dit het aantal\
+            \ werkdagen, kalenderdagen, weken, maanden of jaren van de termijn."
+          example: "D25"
+        servicenorm:
+          type: "string"
+          title: "Periodeduur"
+          description: "Het aantal tijdseenheden van de doorlooptijd Dit element een\
+            \ een technische invulling van de gegevensgroep *servicenormBehandelingZaaktype*\
+            \ uit het IMZTC. (De periode waarbinnen verwacht wordt dat een ZAAK van\
+            \ het ZAAKTYPE afgerond wordt conform de geldende servicenormen van de\
+            \ zaakbehandelende organisatie(s) Voor de doorlooptijd wordt gebruik gemaakt\
+            \ van [ISO-8601 durations](https://en.wikipedia.org/wiki/ISO_8601#Durations).\
+            \ Afhankelijk van de waarde van ‘Periode-eenheid’ betreft dit het aantal\
+            \ werkdagen, kalenderdagen , weken, maanden of jaren van de termijn."
+          example: "D15"
+        eigenschappen:
+          title: "heeftEigenschap"
+          type: "array"
+          description: "Het ZAAKTYPE van de ZAAKen waarvoor deze EIGENSCHAP van belang\
+            \ is."
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        statustypen:
+          title: "heeftStatustype"
+          type: "array"
+          description: "Het ZAAKTYPE van ZAAKen waarin STATUSsen van dit STATUSTYPE\
+            \ bereikt kunnen worden. De relatiesoort is vooral opgenomen teneinde\
+            \ betrokkenen te kunnen informeren wat de eerstvolgend te bereiken status\
+            \ in een zaak is en binnen welke termijn het bereiken van die status verwacht\
+            \ wordt."
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        catalogussen:
+          type: "string"
+          format: "uri"
+          readOnly: true
+        besluittypen:
+          title: "heeftRelevant"
+          type: "array"
+          description: "De BESLUITTYPEn die relevant kunnen zijn voor ZAAKen van dit\
+            \ ZAAKTYPE Niet elk BESLUITTYPE is relevant voor ZAAKen van een ZAAKTYPE.\
+            \ Zo is het BESLUITTYPE met Besluittype-omschrijving generiek 'Handhavingsbesluit'\
+            \ erg relevant voor zaaktypen die betrekking hebben op handhaving, maar\
+            \ bijvoorbeeld niet voor behandelen van een aanvraag voor een reisdocument\
+            \ of een melding geslachtsnaamwijziging, et cetera. Deze relatiesoort\
+            \ is opgenomen om bij een ZAAKTYPE vast te kunnen leggen welke deelverzameling\
+            \ BESLUITTYPEn relevant kan zijn voor ZAAKen van dit ZAAKTYPE en behandelaren\
+            \ zo een overzichtelijke lijst met besluittypen te kunnen presenteren."
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        roltypen:
+          title: "heeftRoltype"
+          type: "array"
+          description: "De ROLTYPEn waarin BETROKKENEn een ROL kunnen uitoefenen in\
+            \ ZAAKen van dit ZAAKTYPE. Elke zaakbehandelende organisatie is vrij in\
+            \ het definiëren van ROLTYPEn die passen bij het zaak- of procestype:\
+            \ subsidieaanvrager, adviesopsteller, inspecteur, juridisch adviseur,\
+            \ vergunningbehandelaar, bezwaarindiener, klager, etcetera."
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+    MogelijkeBetrokkene:
+      type: "object"
+      description: "Deze groep is een technische invulling van de attribuutsoor soortBetrokkene\
+        \ uit het IMZTC Deze groep is een technische invulling van de attribuutsoor\
+        \ soortBetrokkene uit het IMZTC"
+      required:
+      - "betrokkeneType"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        betrokkeneType:
+          type: "string"
+          title: "betrokkeneType"
+          description: "Het objecttype van de betrokkene Het objecttype van de betrokkene\
+            \ alle alfanumerieke tekens"
+          example: "Medewerker"
+        betrokkene:
+          type: "string"
+          title: "betrokkene"
+          description: "De URL naar de specifieke betrokkene. BusinessRule: Dit kan\
+            \ alleen ingevuld zijn in het geval dat het betrokkeneType een Organisatorische\
+            \ Eeenheid is of een Medewerker. De URL naar de specifieke betrokkene.\
+            \ BusinessRule: Dit kan alleen ingevuld zijn in het geval dat het betrokkeneType\
+            \ een Organisatorische Eeenheid is of een Medewerker."
+          format: "uri"
+          example: "https://turfbrug.nl/medewerkersadministratie/medewerkers/uuid"
+    Specificatie:
+      type: "object"
+      description: "Attribuutkenmerken van de eigenschap Met de ‘subattributen’ (van\
+        \ deze groepattribuutsoort) Groep, Formaat, Lengte, Kardinaliteit en Waardenverzameling\
+        \ wordt een eigenschap gedetailleerd gespecificeerd. Dit vindt alleen plaats\
+        \ als de eigenschap niet gespecificeerd is door middel van het groepattribuutsoort\
+        \ ‘Referentie naar eigenschap’."
+      required:
+      - "formaat"
+      - "lengte"
+      - "kardinaliteit"
+      properties:
+        url:
+          title: "Url"
+          type: "string"
+          format: "uri"
+          readOnly: true
+        groep:
+          type: "string"
+          title: "Groep"
+          description: "Benaming van het object of groepattribuut waarvan de EIGENSCHAP\
+            \ een inhoudelijk gegeven specificeert. De attribuutsoort maakt het mogelijk\
+            \ om eigenschappen te groeperen naar een object of een groepattribuut\
+            \ en, met een StUF-ZKN-bericht, de waarden van de bij een groep behorende\
+            \ eigenschappen voor meerdere objecten uit te wisselen (bijvoorbeeld een\
+            \ ‘kapvergunning’ voor meerdere bomen die ieder apart geduid worden) .\
+            \ Letters, cijfers en liggende streepjes"
+          maxLength: 32
+        formaat:
+          $ref: "#/components/schemas/Formaat"
+        lengte:
+          type: "string"
+          title: "Lengte"
+          description: "Het aantal karakters (lengte) waarmee waarden van de EIGENSCHAP\
+            \ worden vastgelegd. Default: Als Formaat = tekst: 0-255 Als Formaat =\
+            \ getal: n,m (n: aantal cijfers geheel getal, m: aantal decimalen) Als\
+            \ Formaat = datum: 8 Als Formaat = datum/tijd: 14"
+          maxLength: 14
+        kardinaliteit:
+          type: "string"
+          title: "Kardinaliteit"
+          description: "Het aantal mogelijke voorkomens van waarden van deze EIGENSCHAP\
+            \ bij een zaak van het ZAAKTYPE. Default: gehele getallen groter dan 0\
+            \ 'N' voor ongelimiteerd"
+          maxLength: 3
+        waardenverzameling:
+          type: "string"
+          title: "Waardenverzameling"
+          description: "Een waarde die deze EIGENSCHAP kan hebben. Door middel van\
+            \ deze attribuutsoort kan een (reeks van) waarde(n) voor de EIGENSCHAP\
+            \ worden gedefinieerd. Bijvoorbeeld: 'J' en 'N'."
+          maxLength: 100
+    Formaat:
+      type: "string"
+      description: "Opsomming van de soorten tekens waarmee waarden van een EIGENSCHAP\
+        \ kunnen worden vastgelegd.:\n* tekst - tekst\n* getal - getal\n* datum jjjjmmdd\
+        \ - datum (jjjjmmdd)\n* datum tijd jjjjmmdduummss - datum/tijd (jjjjmmdduummss)"
+      enum:
+      - "tekst"
+      - "getal"
+      - "datum jjjjmmdd"
+      - "datum tijd jjjjmmdduummss"
+    RoltypeomschrijvingGeneriek:
+      type: "string"
+      description: "Opsomming van waarden van de algemeen gehanteerde omschrijving\
+        \ van de aard van de ROL.:\n* Adviseur - Adviseur\n* Behandelaar - Behandelaar\n\
+        * Belanghebbende - Belanghebbende\n* Beslisser - Beslisser\n* Initiator -\
+        \ Initiator\n* Klantcontacter - Klantcontacter\n* Mede initiator - Mede-initiator\n\
+        * Zaakco rdinator - Zaakcoördinator"
+      enum:
+      - "Adviseur"
+      - "Behandelaar"
+      - "Belanghebbende"
+      - "Beslisser"
+      - "Initiator"
+      - "Klantcontacter"
+      - "Mede initiator"
+      - "Zaakco rdinator"
