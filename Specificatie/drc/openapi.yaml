@@ -1286,12 +1286,12 @@ components:
           example: "Verslag van de commissievergadering om de boom voor het stadshuis\
             \ de redden van de iepenziekte."
         vertrouwelijkheidaanduiding:
-          $ref: "#/components/schemas/Vertrouwelijkheidaanduiding"
+          $ref: "#/components/schemas/Vertrouwelijkheidaanduiding_enum"
         informatieobjecttypen:
           type: "string"
           format: "uri"
           readOnly: true
-    Vertrouwelijkheidaanduiding:
+    Vertrouwelijkheidaanduiding_enum:
       type: "string"
       description: "Aanduidingen van de mate waarin informatie voor de openbaarheid\
         \ bestemd is. Nb. De waarden zijn afgeleid van het Besluit voorschrift informatiebeveiliging\
